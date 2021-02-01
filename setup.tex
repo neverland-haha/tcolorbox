@@ -1,0 +1,110 @@
+%插图
+\usepackage{graphicx}
+%盒子
+\usepackage[most]{tcolorbox}
+%设置脚注
+\usepackage[noadjust]{marginnote}
+\renewcommand*{\raggedleftmarginnote}{}
+\renewcommand*{\raggedrightmarginnote}{}
+\usepackage[marginal]{footmisc}
+%特殊符号及数学符号
+\usepackage{pifont}
+\usepackage{amssymb,amsmath}
+\usepackage{breqn}
+\usepackage{pxfonts}
+
+%设置列表环境的标号以及引用，如需设置多层级请自行参阅宏包使用手册
+\usepackage{enumitem}
+\setlist[enumerate,1]{label = (\arabic*),
+	ref   = (\arabic*)}
+%设置页面尺寸
+\usepackage[left=2cm,right=2cm,top=1.5cm,bottom=1.5cm]{geometry}
+%页眉页脚
+\usepackage{fancyhdr} 
+\pagestyle{plain}
+%定义脚注
+\makeatletter
+\renewcommand\thefootnote{\myfootnotestyle{\arabic{footnote}}}
+\def\@makefnmark{\hbox{\textsuperscript{\@thefnmark}}}
+\newcommand\myfootnotestyle[1]{\ifcase#1 \or \ding{182}\or \ding{183}\or
+	\ding{184}\or \ding{185}\or \ding{186}\or \ding{187}%
+	\or \ding{188}\or \ding{189}\or \ding{190}\or \ding{191}\else *\fi\relax}
+\makeatother
+
+%%图文混排
+\usepackage{picinpar}
+%无法推导出符号定义
+\newcommand{\notimplies}{%
+	\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+
+%TikZ设置
+\usepackage{tikz}
+\usepackage[tikz]{bclogo}
+\usepackage{tikzpagenodes}
+\tcbuselibrary{skins}
+
+%超链接
+\usepackage[hidelinks]{hyperref}
+
+%定义颜色
+\usepackage{xcolor}
+\definecolor{thinkcolor}{RGB}{227,196,144}
+\definecolor{thinkcolor2}{RGB}{172,128,75}
+\definecolor{observecolor}{RGB}{153,201,227}
+\definecolor{explorecolor}{RGB}{178,217,200}
+\definecolor{textcolor1}{RGB}{77,174,234}
+
+\tcbset{
+    common/.style={
+		enhanced,
+		arc=0mm,
+		fonttitle=\large\bfseries,
+		coltitle=black,
+		attach boxed title to top left={xshift=0mm,
+										yshift=-0.50mm},
+		boxed title style={
+			skin=enhancedfirst jigsaw,
+			size=small,
+			arc=5mm,
+			bottom=0mm,
+			left=8mm,
+			right=26mm,
+			top=1mm},
+			boxrule=0pt,
+			frame hidden},
+    thinkstyle/.style={
+		common,
+		colbacktitle=thinkcolor,
+		colframe=thinkcolor,
+		colback=thinkcolor!40,
+		borderline north={4pt}{0pt}{thinkcolor}},
+	observestyle/.style={
+		common,
+		colbacktitle=observecolor,
+		colframe=observecolor,
+		colback=observecolor!40,
+		borderline north={4pt}{0pt}{observecolor}},
+	explorestyle/.style={
+		common,
+		colbacktitle=explorecolor,
+		colframe=explorecolor,
+		colback=explorecolor!40,
+	borderline north={4pt}{0pt}{explorecolor}},
+	before upper={\parindent1em}		%设置段首缩进
+}	
+%颜色
+\newtcolorbox{think0}{thinkstyle,title= \raisebox{-0.1cm} { \hspace{-0.35cm} \includegraphics{logo1}} \  \raisebox{0.1cm} { \color{olive} \zihao{4} 思 \ 考} } 
+\newtcolorbox{think}{thinkstyle,title=     \raisebox{-0.2cm}{\bcquestion }   \color{olive} \zihao{4} 思 \ 考 }  
+\newtcolorbox{observe0}{observestyle,title= \raisebox{-0.15cm}{\hspace{-0.2cm} \includegraphics{logo2}} \  \color{yellow}  \zihao{4} 观\ 察}
+\newtcolorbox{observe}{observestyle,title=   \raisebox{-0.2cm}{\bcfleur}  \color{yellow}  \zihao{4}  \ 观 \ 察}
+\newtcolorbox{explore0}{explorestyle,title = \raisebox{-0.15cm} {\includegraphics{logo3} \  \raisebox{0.15cm}{
+	\color{teal} \zihao{4}	 探\ 索}}}
+\newtcolorbox{explore}{explorestyle,title =    \raisebox{-0.2cm}{ \bclampe}  \ \color{teal}  \zihao{4} 探 \ 索}
+
+\newtcolorbox{custom}[2][gray]{
+	common,
+	title=#2,
+	colbacktitle=#1,
+	colframe=#1,
+	colback=#1!40,
+	borderline north={4pt}{0pt}{#1}}
